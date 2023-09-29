@@ -1,0 +1,10 @@
+Nell'esercizio di oggi siamo andati ricreare uno scambio tra un Client e un Server, rispettivamente Win7 e kali linux.
+
+La prima cosa da fare è stata aggiornare gli indirizzi IP.
+Sotto questo punto di vista la maggior parte del lavoro con gli indirizzi è stato effettuato su win, il quale ha un firewall intelligente. E' stato necessario aggiornare l'eccezione per gli ip autorizzati a comunicare con la nostra macchina virtuale.
+
+Una volta su su Kali, holanciato da prompt la linea di comando: sudo nano etc/inetsim/inetsim.conf.
+una volta fatto ciò ho abilitato i servizi di DNS, HTTP, HTTP. 
+è stato necessario anche modificare il nome del dominio dns per far si che ricercando da win 7 epicode.internal ci riportasse alla nostra schermata di inetsim.
+
+Una volta che ci siamo accertati che funziona, con wireshark sono andato a sniffare tutti i pacchetti provenienti dal nostro indirizzo IP, e selezionato prima il servizio HTTP e successivamente l'https.
