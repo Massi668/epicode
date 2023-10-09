@@ -1,0 +1,3 @@
+Nel programma di oggi ci veniva chiesto di realizzare un piccolo menu che permettesse di scelgiere di quale forma geometrica volessimo calcolare il perimetro o nel caso del cerchio la circonferenza.
+Ho decico di dichiarare prime 3 funzioni che servissero appunto a effettuare questi calcoli per far si che nel programma principale l'utente dovesse solo sceliere tramite un ciclo if come procedere.
+Una soluzione alternativa sarebbe potututa essere quella di creare 3 moduli e andarli a richiamare nello stesso modo del mio programma.
