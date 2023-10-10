@@ -1,0 +1,58 @@
+Partiamo col definire cos'è un socket:
+I socket di rete sono utilizzati nelle reti di computer e permettono di scambiare pacchetti (dati) tra due computer, una sorgente ed un destinatario. Quello che andremo a vedere è un programma che resta in ascolto di comunicazioni TCP in entrata, come se fosse un server, su uno specifico indirizzo IP e porta.  
+
+
+import socket
+
+SRV_ADDR = input("Type the server IP address: ")
+SRV_PORT = int(input("Type the server port: "))
+
+def print_menu():
+    print("""\n\n0) Close the connection
+1) Get system info
+2) List directory contents""")
+
+my_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+my_sock.connect((SRV_ADDR, SRV_PORT))
+
+print("Connection established")
+print_menu()
+
+while 1:
+    message = input("\n-Select an option: ")
+
+    if(message == "0"):
+        my_sock.sendall(message.encode())
+        my_sock.close()
+        break
+
+    elif(message =="1"):
+        my_sock.sendall(message.encode())
+        data = my_sock.recv(1024)
+        if not data: break
+        print(data.decode('utf-8'))
+
+    elif(message == "2"):
+        path = input("Insert the path: ")
+        my_sock.sendall(message.encode())
+        my_sock.sendall(path.encode())
+        data = my_sock.recv(1024)
+        data = data.decode('utf-8').split(",")
+        print(""40)
+        for x in data:
+            print(x)
+        print(""40)
+
+
+---------------------------------------------------------------------------
+
+La prima cosa che andiamo a fare è importare il modulo dei socket in python.
+Successivamente creiamo due variabili, una con l’indirizzo IP del PC dove vogliamo mettere il servizio in ascolto, ed una con una porta che poi useremo per la connessione.
+Subito dopo abbiamo una funzione (DEV) per stampare il menu.
+Nelle righe successive andiamo a creare il socket con il comando (socket.socket(socket.AF_INET, socket.SOCK_STREAM)) questo crea un nuovo socket chiamato my_sock e da anche specifiche informazioni riguardo a questo, in quanto "socket.AF_INET" fa riferimento al tipo di indirizzo ip (ipv4) e "socket.SOCK_STREAM" fa riferimento al tipo di connessione (TCP).
+Dopo aver creato un nuovo socket, dobbiamo collegare il socket all’indirizzo e la porta che abbiamo specificato (my_sock.connect).
+Dopo di che richiamiamo la funzione dichiarata nella parte alta del programma, che ci va ad aprire il nostro menu di scelta e dopo di che si entra in un ciclo while dove l'utente può inserire uno dei seguenti comandi:
+
+"0": Chiude la connessione e termina il programma.
+"1": Invia il comando "1" al server, che dovrebbe essere interpretato come una richiesta di informazioni di sistema. Successivamente, il client riceve una risposta dal server (presumibilmente dati di sistema) e li visualizza sullo schermo.
+"2": Invia il comando "2" al server, che dovrebbe essere interpretato come una richiesta di elenco dei contenuti di una directory specifica. L'utente è quindi invitato a inserire il percorso della directory, che viene inviato al server. Il client riceve una risposta dal server (presumibilmente l'elenco dei file nella directory) e lo visualizza sullo schermo.

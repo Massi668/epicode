@@ -1,0 +1,52 @@
+In questo secondo programma andiamo a creare un server  che ascolta su una porta specifica (1234) e accetta connessioni dai client. Il server risponde a comandi inviati dai client e fornisce loro informazioni di sistema o elenchi di file in base ai comandi ricevuti.
+
+
+import socket, platform, os
+
+SRV_ADDR = ""
+SRV_PORT = 1234
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.bind((SRV_ADDR, SRV_PORT))
+s.listen(1)
+connection, address = s.accept()
+
+print ("client connected: ", address)
+
+while 1:
+    try:
+        data = connection.recv(1024)
+    except:continue
+
+    if(data.decode('utf-8') == '1'):
+        tosend = platform.platform() + " " + platform.machine()
+        connection.sendall(tosend.encode())
+    elif(data.decode('utf-8') =='2'):
+        data = connection.recv(1024)
+        try:
+            filelist = os.listdir(data.decode('utf-8'))
+            tosend = ""
+            for x in filelist:
+                tosend += "," + x
+        except:
+            tosend = "Wrong path"
+        connection.sendall(tosend.encode())
+    elif(data.decode('utf-8') == '0'):
+        connection.close()
+        connection, address = s.accept()
+
+
+
+Come sempre come prima cosa andiamo ad importare i diversi moduli che ci serviranno nel programma.
+
+Il server crea una socket TCP, la associa all'indirizzo IP vuoto ("") e alla porta 1234, quindi inizia ad ascoltare connessioni in entrata.
+
+Quando un client si connette al server, il server accetta la connessione e ottiene l'indirizzo del client.
+
+Il server entra in un loop infinito (while 1) per ascoltare i comandi inviati dal client.
+
+Se il server riceve il comando "1" dal client, invia informazioni di sistema al client. Le informazioni includono la piattaforma (ad esempio, Windows, Linux) e il tipo di architettura della macchina (ad esempio, x86_64).
+
+Se il server riceve il comando "2" dal client, attende di ricevere il percorso della directory dal client. Poi cerca l'elenco dei file nella directory e lo invia al client, separando i nomi dei file con virgole. Se il percorso specificato non esiste, il server invia "Wrong path" come risposta.
+
+Se il server riceve il comando "0" dal client, chiude la connessione corrente con quel client e attende una nuova connessione.
