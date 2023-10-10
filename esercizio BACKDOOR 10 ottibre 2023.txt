@@ -1,0 +1,11 @@
+Una backdoor in cybersecurity si riferisce a una vulnerabilità o a una via di accesso segreta, spesso nascosta o non autorizzata, che permette a un attaccante di accedere a un sistema informatico o a una rete senza essere rilevato. Questa via di accesso può essere creata intenzionalmente da un utente malintenzionato o da un insider.
+
+I principali pericoli legati alle backdoor sono:
+
+Accesso non autorizzato: Le backdoor permettono agli aggressori di accedere a sistemi e dati senza autorizzazione, il che può portare a furti di dati, danni finanziari, spionaggio industriale e altro ancora.
+
+Persistenza: Le backdoor sono progettate per rimanere nascoste e persistenti nel sistema per un lungo periodo, consentendo agli aggressori di mantenere l'accesso anche dopo eventuali misure di rimedio o di sicurezza adottate.
+
+Elevazione dei privilegi: Spesso, le backdoor vengono utilizzate per ottenere accesso con privilegi elevati, come l'accesso amministrativo o di root, che consente agli aggressori di controllare completamente il sistema.
+
+Attacchi futuri: Una volta che un aggressore ha accesso a un sistema attraverso una backdoor, può utilizzare questo accesso per installare malware, raccogliere ulteriori informazioni o sfruttare ulteriori vulnerabilità, rendendo il sistema ancora più vulnerabile in futuro.
