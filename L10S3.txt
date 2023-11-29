@@ -1,0 +1,20 @@
+Traccia: Nella lezione teorica del mattino, abbiamo visto i fondamenti del linguaggio Assembly. 
+Dato il codice in Assembly per la CPU x86 allegato qui di seguito, identificare lo scopo di ogni istruzione, 
+inserendo una descrizione per ogni riga di codice:
+
+0x00001141 <+8>:    mov    EAX,0x20                           Carica il valore esadecimale 0x20 nel registro EAX.                        EAX=32;
+0x00001148 <+15>:   mov    EDX,0x38                           Carica il valore esadecimale 0x38 nel registro EDX.                        EDX=56;
+0x00001155 <+28>:   add    EAX,EDX                            Aggiunge il contenuto del registro EDX al registro EAX.                    EAX=56+32=88;
+0x00001157 <+30>:   mov   EBP, EAX                            Muove il valore contenuto nel registro EAX nel registro EBP.               EBP=88;
+0x0000115a <+33>:   cmp   EBP,0xa                             Compara il valore nel registro EBP con il valore esadecimale 0xa
+0x0000115e <+37>:   jge      0x1176 <main+61>                 Salta a 0x1176 
+0x0000116a <+49>:   mov   eax,0x0                             Carica il valore 0x0 nel registro eax                                      eax=0;
+0x0000116f <+54>:    call    0x1030 <printf@plt>              Chiama la funzione printf
+
+
+Specifiche sul comando "cmp" questo sottrae il secondo operando dal primo, ma a differenza dell'istruzione sub, non memorizza il risultato. L'istruzione cmp modifica i flag del registro dei flag del processore a seconda del risultato della sottrazione. In questo caso siccome la destinazione è > della sorgente avremo Lo zero flag con valore 0 e il carry flag con valore 0.
+
+Specifiche sul comando "jge" questo Salta alla locazione specificata se la destinazione è maggiore o uguale della sorgente nell’istruzione «cmp».
+
+Specifiche sul comando "call"  sta chiamando la funzione printf. Tuttavia, il target della chiamata è specificato come 0x1030, che è l'indirizzo di una voce nella PLT per printf.
+La PLT è una struttura che facilita le chiamate a funzioni all'interno di un programma, fornendo uno strato di indirezione per risolvere gli indirizzi delle funzioni durante il tempo di esecuzione.In sintesi, la PLT è una componente chiave nel supportare il collegamento dinamico, che consente di mantenere un'applicazione più flessibile e di adattarsi a modifiche nelle librerie condivise senza richiedere una nuova compilazione del programma principale.
